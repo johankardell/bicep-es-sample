@@ -1,10 +1,10 @@
-name: governance
+name: online-chatbot-dev
 
 on:
   push:
     branches: [main]
     paths:
-      - governance/**
+      - landingzones/online/online-chatbot-dev/**
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -16,4 +16,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run what-if deployment
-        run: az deployment mg create --whatif --template-file governance/main.bicep
+        run: az deployment subscription create --whatif --template-file landingzones/online/online-chatbot-dev/main.bicep
