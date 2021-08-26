@@ -1,7 +1,13 @@
-module locationpolicyassignment 'assignments/locationpolicyassignment.bicep' = {
-  name: 'locationpolicyassignment'
+targetScope = 'managementGroup'
+
+module DenyFandGSeriesVMs 'definitions/DenyFandGSeriesVMs.bicep' = {
+  name: 'DenyFandGSeriesVMs'
 }
 
-module locationpolicdefinition 'definitions/locationpolicydefintion.bicep' = {
-  name: 'locationpolicdefinition'
+resource policyAssignment 'Microsoft.Authorization/policyAssignments@2020-03-01' = {
+  name: 'DenyFandGSeriesVMs'
+  properties: {
+    policyDefinitionId: DenyFandGSeriesVMs.outputs.id
+    scope: managementGroup('es-bicep-sample')
+  }
 }
